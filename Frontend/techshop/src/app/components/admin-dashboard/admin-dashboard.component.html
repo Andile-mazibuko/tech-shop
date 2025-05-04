@@ -1,1 +1,70 @@
-<p>admin-dashboard works!</p>
+<mat-sidenav-container class="side-nav">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    class="sidenav-content"
+    opened="true"
+    [ngClass]="isOpen ? 'default-sidenav' : 'small-sidenav'"
+  >
+    <button class="tab">
+      <mat-icon>home</mat-icon>
+      <span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Home</span>
+    </button>
+    <a routerLink="stats" class="tab">
+      <mat-icon>show_chart</mat-icon
+      ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Analytics</span>
+    </a>
+    <button class="tab"></button>
+    <button class="tab"></button>
+    <button class="tab"></button>
+  </mat-sidenav>
+
+  <mat-sidenav-content
+    [ngClass]="isOpen ? 'default-sidenav-content' : 'small-sidenav-content'"
+  >
+    <div class="top-bar">
+      <button mat-button (click)="widthToggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <div class="main">
+      <div class="summary-cont">
+        <div class="sum products">
+          <div class="icon">
+            <mat-icon>shopping_bag</mat-icon>
+          </div>
+          <div class="num">
+            <h1>56</h1>
+            <div class="title">new products</div>
+          </div>
+        </div>
+
+        <div class="sum users">
+          <div class="icon">
+            <mat-icon>groups</mat-icon>
+          </div>
+          <div class="num">
+            <h1>56</h1>
+            <div class="title">new users</div>
+          </div>
+        </div>
+
+        <div class="sum new-orders">
+          <div class="icon">
+            <mat-icon>local_shipping</mat-icon>
+          </div>
+          <div class="num">
+            <h1>56</h1>
+            <div class="title">new orders</div>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!--
+
+-->

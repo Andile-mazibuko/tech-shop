@@ -1,4 +1,4 @@
-from sqlalchemy import Column, PrimaryKeyConstraint, String,Integer,Float,ForeignKey
+from sqlalchemy import Column, PrimaryKeyConstraint, String,Integer,Float,ForeignKey,Date
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -40,9 +40,18 @@ class Order(Base):
     __tablename__ = "orders"
     order_id = Column(Integer,primary_key=True)
     user_id = Column(Integer, ForeignKey("users.user_id"))
+    status = Column(String)
+    date= Column(Date)
 
+    #Relationships
     owner = relationship("User",back_populates="user_order")
     order_product = relationship("OrderProduct",back_populates="order")
+
+    def __init__(self,user_id:int,status:str = "payment recieved",date = Date()):
+        self.user_id = user_id
+        self.status = status
+        self.date = date
+
 
 #join ORDER and products
 class OrderProduct(Base):
