@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { RouterModule, RouterOutlet } from '@angular/router';
 @Component({
+  
   selector: 'app-admin-dashboard',
   standalone: true,
   imports: [MatCardModule,MatSidenavModule,RouterOutlet,RouterModule,MatButtonModule,MatIconModule,NgClass],

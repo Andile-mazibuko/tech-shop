@@ -6,6 +6,9 @@
     opened="true"
     [ngClass]="isOpen ? 'default-sidenav' : 'small-sidenav'"
   >
+    <div class="logo">
+      <img src="favicon.ico" alt="" />
+    </div>
     <button class="tab">
       <mat-icon>home</mat-icon>
       <span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Home</span>
@@ -14,7 +17,11 @@
       <mat-icon>show_chart</mat-icon
       ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Analytics</span>
     </a>
-    <button class="tab"></button>
+
+    <button class="tab">
+      <mat-icon>add</mat-icon
+      ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Add product</span>
+    </button>
     <button class="tab"></button>
     <button class="tab"></button>
   </mat-sidenav>
