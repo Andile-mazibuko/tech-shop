@@ -1,9 +1,12 @@
 .container{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin-top: 2%;
 }
-.chart-container{
+.line-chart{
     width: 40%;
 }
-
+.doughnut{
+    width: 20%;
+}

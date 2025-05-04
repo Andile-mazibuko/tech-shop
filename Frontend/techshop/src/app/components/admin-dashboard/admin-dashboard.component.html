@@ -18,7 +18,7 @@
       ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Analytics</span>
     </a>
 
-    <button class="tab">
+    <button class="tab" (click)="addProduct()">
       <mat-icon>add</mat-icon
       ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Add product</span>
     </button>
@@ -69,6 +69,16 @@
       </div>
       <router-outlet></router-outlet>
     </div>
+    
+    <div class="small-summary">
+        <div class="latest-orders">
+            <h2>Latest Orders</h2>
+
+
+        </div>
+        <div class="div2">axc</div>
+    </div>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 
