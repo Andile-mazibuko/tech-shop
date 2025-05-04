@@ -1,0 +1,31 @@
+.close-btn{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.close-btn button{
+    height: 40px;
+    background-color: transparent !important;
+    margin-top: 1%;
+    margin-right: 1%;
+
+}
+form{
+    margin-top: 2%;
+    width: 100%;
+    
+}
+mat-form-field{
+    width: 80%;
+    margin-left: 10%;
+}
+.submit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+.submit button{
+    background-color: green;
+    color: white;
+}

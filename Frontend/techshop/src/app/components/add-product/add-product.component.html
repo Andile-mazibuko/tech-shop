@@ -1,1 +1,41 @@
-<p>add-product works!</p>
+<div class="close-btn">
+  <button mat-button (click)="closeDialog()">
+    <mat-icon> close </mat-icon>
+  </button>
+</div>
+<form action="">
+  <mat-form-field appearance="outline">
+    <mat-label> Name </mat-label>
+    <input type="text" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label> title </mat-label>
+    <input type="text" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Category</mat-label>
+    <mat-select>
+        <mat-option value="Computer">Computer</mat-option>
+        <mat-option value="GPU">Graphics Card</mat-option>
+        <mat-option value="CPU">Processor</mat-option>
+        <mat-option value="Keyboard">Keyboard</mat-option>
+        <mat-option value="Headset">Headset</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label> Price </mat-label>
+    <input type="number" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label> Description </mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+
+  <div class="submit">
+    <button type="submit" mat-button>Add product</button>
+  </div>
+</form>
