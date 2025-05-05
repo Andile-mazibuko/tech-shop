@@ -48,22 +48,19 @@ export class AddProductComponent implements OnInit {
     this.dialogRef.close();
   }
   createProduct() {
-    
-      const product: Product = {
-        title: this.addProdFormGroup.get("title")?.value,
-        name: this.addProdFormGroup.get("name")?.value,
-        description: this.addProdFormGroup.get("description")?.value,
-        price: parseFloat(this.addProdFormGroup.get("price")?.value),
-        category: this.addProdFormGroup.get("category")?.value,
-      };
-      this.prodServ.addProduct(product).subscribe({
-        next: (data) => {
-          console.log('Product added!', data);
-        },
-        error: (error) => {
-          console.error('Error adding product:', error);
-          console.error('FastAPI validation details:', error.error);
-        }
-      });
+    const product: Product = {
+      title: this.addProdFormGroup.get('title')?.value,
+      name: this.addProdFormGroup.get('name')?.value,
+      description: this.addProdFormGroup.get('description')?.value,
+      price: parseFloat(this.addProdFormGroup.get('price')?.value),
+      category: this.addProdFormGroup.get('category')?.value,
+    };
+
+    if (this.addProdFormGroup.valid) {
+      this.prodServ.addProduct(product);
+      this.closeDialog();
+    } else {
+      alert('Please fill in the missing fields');
+    }
   }
 }

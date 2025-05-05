@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { MatTableModule } from '@angular/material/table';
+import { Product } from '../../interfaces/models';
+import { ProductService } from '../../services/product.service';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
@@ -24,8 +26,9 @@ import { MatTableModule } from '@angular/material/table';
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit {
   isOpen = true;
+  products: Product[] = []
   displayedColumns: string[] = ['order_id', 'owner', 'status', 'total'];
   dataSource = [
     {
@@ -59,9 +62,18 @@ export class AdminDashboardComponent {
       total: 'R1299,99',
     }
   ];
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog,private prodServ: ProductService) {}
+  
+  ngOnInit(): void {
+    this.prodServ.getProducts().subscribe(data =>{
+      this.products = data
+    })
+  }
+  ngAfterViewInit(): void{
+    
+  }
 
-  widthToggle() {
+  widthToggle(): void {
     this.isOpen = !this.isOpen;
   }
   addProduct() {
