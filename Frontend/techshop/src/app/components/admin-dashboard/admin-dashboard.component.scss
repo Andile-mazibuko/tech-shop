@@ -88,7 +88,7 @@ mat-sidenav-content {
 }
 .sum {
   background-color: grey;
-  width: 500px;
+  width: 30%;
   height: 150px;
   border-radius: 10px;
   display: flex;
@@ -148,7 +148,17 @@ mat-sidenav-content {
 .latest-orders{
     width: 45%;
     height: 40vh;
+    overflow: hidden;
+    overflow-y: scroll;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.latest-orders::-webkit-scrollbar{
+  display: none;
+}
+.latest-orders h2{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .div2{
     width: 45%;

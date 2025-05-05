@@ -1,6 +1,8 @@
+from os import name
+from turtle import title
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import LogInSchema, UserSchema
+from schemas import LogInSchema, ProductSchema, UserSchema
 from database import Base,SessionLocal,engine
 from models import User,Product,Order,OrderProduct
 
@@ -28,3 +30,13 @@ def get_user(user_credentials: LogInSchema) :
         return user
     else:
         return ""
+
+@app.post("/add_product")
+def addProduct(prod: ProductSchema):
+    product: Product = Product(name=prod.name,category=prod.category,price=prod.price,title=prod.title,description=prod.description)
+    
+
+    db_session.add(product)
+    db_session.commit()
+
+    return "product created"
