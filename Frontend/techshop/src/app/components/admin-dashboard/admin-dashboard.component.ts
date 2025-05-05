@@ -79,4 +79,5 @@ export class AdminDashboardComponent implements OnInit {
   addProduct() {
     this.dialog.open(AddProductComponent, { width: '600px' });
   }
+  
 }

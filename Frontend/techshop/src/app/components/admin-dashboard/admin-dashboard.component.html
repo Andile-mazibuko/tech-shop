@@ -22,10 +22,10 @@
       <mat-icon>add</mat-icon
       ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Add product</span>
     </button>
-    <button class="tab">
+    <a class="tab" routerLink="account">
       <mat-icon>person</mat-icon>
       <span [ngClass]="isOpen ? 'text-open' : 'text-closed'"> Account</span>
-    </button>
+    </a>
     <button class="tab">
       <mat-icon>dataset</mat-icon
         ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Tables</span>
