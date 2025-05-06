@@ -7,16 +7,17 @@ import { StatsComponent } from './components/stats/stats.component';
 import { AccountComponent } from './components/account/account.component';
 
 export const routes: Routes = [
+  { path: '', component: MainComponent },
   {
-    path: '',
+    path: 'admin',
     component: AdminDashboardComponent,
     children: [
       { path: '', component: StatsComponent },
       { path: 'stats', component: StatsComponent },
-      { path: 'account', component: AccountComponent }
+      { path: 'account', component: AccountComponent },
     ],
   },
-  { path: 'login', component: LoginComponent },
+  
   { path: 'main', component: MainComponent },
   { path: 'account', component: AccountComponent },
 ];

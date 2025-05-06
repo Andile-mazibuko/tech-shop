@@ -18,11 +18,27 @@ Base.metadata.create_all(engine)
 
 db_session = SessionLocal()
 
-@app.post("/add_user")
+@app.post("/create_account")
 def create_user(user: UserSchema):
-    new_user = User(first_name=user.first_name,last_name=user.last_name,email=user.email,password=user.password)
-    db_session.add(new_user)
-    db_session.commit()
+    new_user = User(
+        first_name=user.first_name,
+        last_name=user.last_name,
+        email=user.email,
+        password=user.password
+        )
+    try:
+        db_session.add(new_user)
+        db_session.commit()
+    except Exception as e:
+         raise HTTPException(status_code=500,detail="Internal server Exception")
+
+@app.get("/get_users")   
+def get_users():
+    try:
+       return db_session.query(User).all()
+    except Exception as e:
+        raise HTTPException(status_code=500,detail="Internal server Exception")
+
 @app.get("/login")
 def get_user(user_credentials: LogInSchema) :
     user = db_session.query(User).filter(User.email == user_credentials.email).first()

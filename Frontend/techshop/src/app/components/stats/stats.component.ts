@@ -35,12 +35,11 @@ export class StatsComponent implements OnInit {
     this.prodServ.getProducts().subscribe((data) => {
       this.products = data;
     });
-    this.categorySummary = this.fetchCategories()
+    this.categorySummary = this.fetchCategories();
   }
   ngAfterViewInit(): void {
     this.createLineChart();
     this.createDoughnut();
-    
   }
 
   createLineChart() {
@@ -73,10 +72,10 @@ export class StatsComponent implements OnInit {
             display: true,
             position: 'right',
           },
-          title:{
+          title: {
             display: true,
-            text:'Revenue and Expenses Per Month'
-          }
+            text: 'Revenue and Expenses Per Month',
+          },
         },
         scales: {
           x: {
@@ -96,8 +95,8 @@ export class StatsComponent implements OnInit {
   }
 
   createDoughnut() {
-    const labels = this.categorySummary.map(sum => sum.category)
-    const data = this.categorySummary.map(sum => sum.total)
+    const labels = this.categorySummary.map((sum) => sum.category);
+    const data = this.categorySummary.map((sum) => sum.total);
     new Chart('doughnut', {
       type: 'doughnut',
       data: {
@@ -109,18 +108,18 @@ export class StatsComponent implements OnInit {
           },
         ],
       },
-      options:{
-        plugins:{
-          legend:{
+      options: {
+        plugins: {
+          legend: {
             display: true,
-            position: 'right'
+            position: 'right',
           },
-          title:{
-            display:true,
-            text: 'Total Quantity by Category'
-          }
-        }
-      }
+          title: {
+            display: true,
+            text: 'Total Quantity by Category',
+          },
+        },
+      },
     });
   }
 
@@ -145,7 +144,7 @@ export class StatsComponent implements OnInit {
     return summary;
   }
   /**
-   * 
+   *
    * @param category category of products e.g GPU, Desktop, Laptop etc
    * @returns the total number of products available based on the catergory
    */

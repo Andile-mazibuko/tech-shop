@@ -1,1 +1,42 @@
-<p>login works!</p>
+
+
+<div class="container">
+    <div class="conts design">
+        <div class="img-cont" >
+            <img src="assets/images/gamer.png" alt="" srcset="">
+        </div>
+        
+    </div>
+  
+    <div class="conts form-container">
+        <div class="close">
+            <button mat-button (click)="close()"><mat-icon>close</mat-icon></button>
+        </div>
+      <h2>Log in Form</h2>
+      <form [formGroup]="loginForm" action="" (ngSubmit)="login()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+  
+        <div class="log-btn">
+          <a href="">Fogort password?</a>
+        </div>
+  
+        <div class="log-btn">
+          <button matButton type="submit">Log in</button>
+        </div>
+        <div class="sign-up" style="margin-top: 5%">
+          Don't have an account ?
+          <button matButton type="button" (click)="signUp()">sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>

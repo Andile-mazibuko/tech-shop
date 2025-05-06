@@ -2,18 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/models';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { globalVars } from '../../utils/global';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl: string = 'http://localhost:8000';
   products: Product[] = [];
   productSubject = new BehaviorSubject<Product[]>([]);
 
   constructor(private http: HttpClient) {}
 
   addProduct(product: Product): void {
-    this.http.post(this.apiUrl + '/add_product', product).subscribe((data) => {
+    this.http.post(globalVars.apiUrl+'/add_product', product).subscribe((data) => {
       this.fetchProducts();
     });
   }
@@ -25,7 +25,7 @@ export class ProductService {
 
   private fetchProducts(): void {
     this.http
-      .get<Product[]>(this.apiUrl + '/get_products')
+      .get<Product[]>(globalVars.apiUrl+'/get_products')
       .subscribe((data) => {
         this.productSubject.next(data);
       });
