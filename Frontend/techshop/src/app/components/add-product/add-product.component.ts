@@ -40,6 +40,7 @@ export class AddProductComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
+      quantity: ['',Validators.required],
       category: ['', Validators.required],
     });
   }
@@ -52,6 +53,7 @@ export class AddProductComponent implements OnInit {
       title: this.addProdFormGroup.get('title')?.value,
       name: this.addProdFormGroup.get('name')?.value,
       description: this.addProdFormGroup.get('description')?.value,
+      quantity: this.addProdFormGroup.get('quantity')?.value,
       price: parseFloat(this.addProdFormGroup.get('price')?.value),
       category: this.addProdFormGroup.get('category')?.value,
     };

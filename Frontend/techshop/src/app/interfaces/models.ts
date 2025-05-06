@@ -4,6 +4,11 @@ export interface Product {
     name : string,
     description: string,
     price: number,
-    category: "Computer"|"GPU"|"CPU"|"Keyboard"|"Headset"
+    quantity: number,
+    category: "Desktop"|"GPU"|"CPU"|"Keyboard"|"Headset"|"Laptop"
 
+}
+export interface CategorySum{
+    category: string,
+    total: number
 }

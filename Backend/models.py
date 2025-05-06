@@ -32,7 +32,7 @@ class Product(Base):
     description = Column(String)
     price = Column(Float, nullable=False)
     category = Column(String,nullable=False)
-
+    quantity = Column(Integer)
     product = relationship("OrderProduct",back_populates="order_product")
 
 

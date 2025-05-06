@@ -19,3 +19,4 @@ class ProductSchema(BaseModel):
     description: str
     price: float
     category: str
+    quantity:int

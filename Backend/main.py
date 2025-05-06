@@ -38,7 +38,8 @@ def addProduct(prod: ProductSchema):
         category=prod.category,
         price=prod.price,
         title=prod.title,
-        description=prod.description
+        description=prod.description,
+        quantity = prod.quantity
         )
     db_session.add(product)
     db_session.commit()

@@ -1,0 +1,28 @@
+mat-expansion-panel{
+    width: 100%;
+
+}
+mat-expansion-panel form{
+    width: 100%;
+    display: grid;
+}
+mat-form-field{
+    width: 50%;
+}
+.btn-cont{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.btn-cont button{
+    width: 100px;
+    margin-right: 2%;
+
+}
+.cancel{
+    background-color: aliceblue;
+}
+.submit{
+    background-color: rgba(0, 0, 128, 0.671);
+    color: white;
+}
