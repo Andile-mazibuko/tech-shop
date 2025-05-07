@@ -56,12 +56,11 @@ export class LoginComponent {
       password: this.loginForm.get('password')?.value,
     };
     this.userServ.login(LOGIN_DETAILTS).subscribe((data: User) => {
-      this.loggedUser.setLoggedUser(data)
-      this.dialogRef.close(data)
+      this.loggedUser.setLoggedUser(data);
+      this.dialogRef.close(data);
     });
 
     globalVars.customerAccess = true;
-    
   }
   signUp() {
     this.close();

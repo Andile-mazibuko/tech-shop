@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <mat-icon>account_circle</mat-icon>Personal Data
@@ -12,15 +12,15 @@
         <form action="">
             <mat-form-field appearance="outline">
                 <mat-label>First name</mat-label>
-                <input matInput>
+                <input matInput [value]="user?.first_name">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Last name</mat-label>
-                <input matInput>
+                <input matInput [value]="user?.last_name">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput>
+                <input matInput [value]="user?.email">
             </mat-form-field>
             <div class="btn-cont">
                 <button mat-button type="button" class="cancel">cancel</button>
