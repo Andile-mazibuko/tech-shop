@@ -15,6 +15,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SignupComponent } from '../signup/signup.component';
 import { LogInInterface, User } from '../../interfaces/models';
 import { globalVars } from '../../../utils/global';
+import { LoggedInUserService } from '../../services/logged-in-user.service';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private userServ: UserService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<LoginComponent>
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private loggedUser: LoggedInUserService
   ) {}
 
   ngOnInit(): void {
@@ -51,14 +53,15 @@ export class LoginComponent {
   login() {
     const LOGIN_DETAILTS: LogInInterface = {
       email: this.loginForm.get('email')?.value,
-      password: this.loginForm.get('password')?.value
+      password: this.loginForm.get('password')?.value,
     };
     this.userServ.login(LOGIN_DETAILTS).subscribe((data: User) => {
-      console.log(data);
+      this.loggedUser.setLoggedUser(data)
+      this.dialogRef.close(data)
     });
 
-    globalVars.customerAccess = true
-    this.close();
+    globalVars.customerAccess = true;
+    
   }
   signUp() {
     this.close();

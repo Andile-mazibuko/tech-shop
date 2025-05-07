@@ -6,12 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SignupComponent } from '../signup/signup.component';
 import { LoginComponent } from '../login/login.component';
-import { Product } from '../../interfaces/models';
+import { Product, User } from '../../interfaces/models';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { globalVars } from '../../../utils/global';
+import { LoggedInUserService } from '../../services/logged-in-user.service';
+import { AccountComponent } from '../account/account.component';
 
 @Component({
   selector: 'app-main',
@@ -31,11 +33,18 @@ import { globalVars } from '../../../utils/global';
 })
 export class MainComponent implements OnInit {
   products: Product[] = [];
-  loggedIn!: boolean
-  constructor(private dialog: MatDialog, private prodServ: ProductService,private route: ActivatedRoute) {}
+  user: User | null = null;
+
+  constructor(
+    private dialog: MatDialog,
+    private prodServ: ProductService,
+    private route: ActivatedRoute,
+    private logServ: LoggedInUserService
+  ) {}
 
   ngOnInit(): void {
-    this.loggedIn = globalVars.customerAccess
+    
+    console.log("MAIN USER",this.user)
     this.prodServ.getProducts().subscribe((data: Product[]) => {
       this.products = data;
     });
@@ -44,10 +53,16 @@ export class MainComponent implements OnInit {
     this.dialog.open(SignupComponent, { width: '600px' });
   }
   logIn() {
-    this.dialog.open(LoginComponent, { width: '1000px', height: '500px' });
+    const dialogRef = this.dialog.open(LoginComponent, { width: '1000px', height: '500px' });
+    
+    dialogRef.afterClosed().subscribe((data:User) =>{
+      this.user = data
+      console.log("MY MAN",this.user)
+    })
+    console.log('LOGGED USER:',this.user)
   }
-  filterProducts(category:string){
-   const snap =  this.route.snapshot.paramMap.get("GPU")
-   console.log(snap)
+  openAccountInfo(event:MouseEvent){
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
+    const dialogRef = this.dialog.open(AccountComponent,{width:"600px"})
   }
 }
