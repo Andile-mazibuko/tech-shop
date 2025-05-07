@@ -40,13 +40,16 @@ def get_users():
     except Exception as e:
         raise HTTPException(status_code=500,detail="Internal server error")
 
-@app.get("/login")
+@app.post("/login")
 def get_user(user_credentials: LogInSchema) :
-    user = db_session.query(User).filter(User.email == user_credentials.email).first()
-    if user.password == user_credentials.password:
-        return user
-    else:
-        return ""
+    try:
+        user:User = db_session.query(User).filter(User.email == user_credentials.email).first()
+        if user.password == user_credentials.password:
+            return user
+        else:
+            raise HTTPException(404)
+    except Exception:
+        raise HTTPException(500)
 
 @app.post("/add_product")
 def addProduct(prod: ProductSchema):
@@ -75,5 +78,5 @@ def get_products_by_category(category:str):
         if not products:
             raise HTTPException(404,"products Not found")
         return products
-    except Exception as e:
+    except Exception:
         raise HTTPException(status_code=500,detail="internal Server error")

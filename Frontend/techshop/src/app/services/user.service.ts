@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/models';
+import { LogInInterface, User } from '../interfaces/models';
 import { globalVars } from '../../utils/global';
 import { Observable } from 'rxjs';
 
@@ -11,6 +11,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  login(loginDetails:LogInInterface):Observable<User>{
+    return this.http.post(globalVars.apiUrl+"/login",loginDetails) as Observable<User>
+  }
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(globalVars.apiUrl+'/get_users')
   }

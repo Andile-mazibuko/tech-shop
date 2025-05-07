@@ -5,9 +5,18 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { StatsComponent } from './components/stats/stats.component';
 import { AccountComponent } from './components/account/account.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
+import { CategorisedProductsComponent } from './components/categorised-products/categorised-products.component';
 
 export const routes: Routes = [
-  { path: '', component: MainComponent },
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      { path: '', component: ListProductsComponent },
+      { path: 'category/:categoryName',component: CategorisedProductsComponent},
+    ],
+  },
   {
     path: 'admin',
     component: AdminDashboardComponent,
@@ -17,7 +26,7 @@ export const routes: Routes = [
       { path: 'account', component: AccountComponent },
     ],
   },
-  
+
   { path: 'main', component: MainComponent },
   { path: 'account', component: AccountComponent },
 ];

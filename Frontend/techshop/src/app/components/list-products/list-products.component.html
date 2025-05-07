@@ -1,1 +1,51 @@
-<p>list-products works!</p>
+<div class="container">
+  <mat-card *ngFor="let product of products">
+    <mat-card-header><b>{{ product.category }}</b></mat-card-header>
+    <img
+      mat-card-image
+      *ngIf="product.category.includes('CPU')"
+      src="https://cdn.pixabay.com/photo/2019/08/08/16/56/cpu-4393384_1280.jpg"
+      alt=""
+    />
+    <img
+      mat-card-img
+      *ngIf="product.category.includes('Keyboard')"
+      src="https://cdn.pixabay.com/photo/2020/01/12/08/12/keyboard-4759499_1280.jpg"
+      alt=""
+    />
+    <img
+      mat-card-img
+      *ngIf="product.category.includes('GPU')"
+      src="https://cdn.pixabay.com/photo/2017/09/29/05/38/pc-2798015_1280.jpg"
+      alt=""
+    />
+    <img
+      mat-card-img
+      *ngIf="product.category.includes('Desktop')"
+      src="https://cdn.pixabay.com/photo/2021/11/22/14/23/computer-6816638_1280.jpg"
+      alt=""
+    />
+    <img
+      mat-card-img
+      *ngIf="product.category.includes('Laptop')"
+      src="https://cdn.pixabay.com/photo/2016/02/17/15/37/laptop-1205256_1280.jpg"
+      alt=""
+    />
+    <img
+      mat-card-img
+      *ngIf="product.category.includes('Headset')"
+      src="https://cdn.pixabay.com/photo/2018/03/27/00/50/child-3264751_1280.jpg"
+      alt=""
+    />
+    <mat-card-content>
+        <b>{{product.title +" "+ product.name}}</b>
+    </mat-card-content>
+    <mat-card-content>
+        R{{product.price}}
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button type="button" class="add-cart">Add to cart {{" "}} <mat-icon>add_shopping_cart</mat-icon></button>
+        <button mat-button type="button" class="add-wishlist"><mat-icon>favorite</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>

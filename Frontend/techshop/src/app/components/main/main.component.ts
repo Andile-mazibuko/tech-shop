@@ -10,7 +10,8 @@ import { Product } from '../../interfaces/models';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import { globalVars } from '../../../utils/global';
 
 @Component({
   selector: 'app-main',
@@ -23,15 +24,18 @@ import { RouterOutlet } from '@angular/router';
     CommonModule,
     MatCardModule,
     RouterOutlet,
+    RouterModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
 export class MainComponent implements OnInit {
   products: Product[] = [];
-  constructor(private dialog: MatDialog, private prodServ: ProductService) {}
+  loggedIn!: boolean
+  constructor(private dialog: MatDialog, private prodServ: ProductService,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.loggedIn = globalVars.customerAccess
     this.prodServ.getProducts().subscribe((data: Product[]) => {
       this.products = data;
     });
@@ -41,5 +45,9 @@ export class MainComponent implements OnInit {
   }
   logIn() {
     this.dialog.open(LoginComponent, { width: '1000px', height: '500px' });
+  }
+  filterProducts(category:string){
+   const snap =  this.route.snapshot.paramMap.get("GPU")
+   console.log(snap)
   }
 }

@@ -1,1 +1,13 @@
-<p>categorised-products works!</p>
+<mat-card *ngFor="let product of products">
+  <mat-card-header>{{ product.category }}</mat-card-header>
+  <img
+    mat-card-image
+    src="https://cdn.pixabay.com/photo/2019/08/08/16/56/cpu-4393384_1280.jpg"
+    alt=""
+  />
+
+  <mat-card-content>
+    {{ product.title + " " + product.name }}
+  </mat-card-content>
+  <mat-card-content> R{{ product.price }} </mat-card-content>
+</mat-card>

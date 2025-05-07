@@ -12,7 +12,13 @@
       </div>
     </form>
   </div>
-  <div class="user-actions">
+  <div class="user-actions" *ngIf="!loggedIn">
+    <button mat-button type="button"><mat-icon>person</mat-icon></button>
+    <button mat-button type="button" (click)="logIn()">Log in</button>
+    <button mat-button type="button" (click)="signUp()">Sign up</button>
+    <button mat-button type="button"><mat-icon>dark_mode</mat-icon></button>
+  </div>
+  <div class="user-actions" *ngIf="loggedIn">
     <button mat-button type="button"><mat-icon>person</mat-icon></button>
     <button mat-button type="button" (click)="logIn()">Log in</button>
     <button mat-button type="button" (click)="signUp()">Sign up</button>
@@ -24,7 +30,7 @@
   <div class="categories">
     <h1>Shop by category</h1>
     <div class="categories-container">
-      <mat-card class="category">
+      <mat-card class="category" [routerLink]="['/category','GPU']">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2017/09/29/05/38/pc-2798015_1280.jpg"

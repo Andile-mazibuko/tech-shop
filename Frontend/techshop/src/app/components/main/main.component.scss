@@ -10,6 +10,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
+  z-index:10;
 }
 .logo {
   width: 30%;
@@ -51,7 +52,7 @@ nav {
   margin-left: 10%;
   margin-top: 80px;
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
   
 }
 .categories{
@@ -60,7 +61,6 @@ nav {
 }
 .categories h1{
   margin: 0 auto;
-  margin-top: 2%;
   width: 15%;
 }
 .categories-container{
@@ -75,6 +75,7 @@ nav {
   background-color: rgb(73, 80, 87, 0.8) ;
   overflow: hidden;
   cursor: pointer;
+  z-index: 1;
 
 }
 .category:hover{
@@ -83,5 +84,4 @@ nav {
 .list-products{
   margin-top: 1%;
   width: 100%;
-  background-color: yellow;
 }
