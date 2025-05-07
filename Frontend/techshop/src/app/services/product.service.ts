@@ -22,6 +22,9 @@ export class ProductService {
     this.fetchProducts();
     return this.productSubject.asObservable();
   }
+  getProductsByCategory(category:string):Observable<Product[]>{
+    return this.http.get<Product[]>(`${globalVars.apiUrl}/prod_category/${category}`)
+  }
 
   private fetchProducts(): void {
     this.http

@@ -1,5 +1,6 @@
 from os import name
-from turtle import title
+from typing import List
+from urllib import response
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from schemas import LogInSchema, ProductSchema, UserSchema
@@ -35,9 +36,9 @@ def create_user(user: UserSchema):
 @app.get("/get_users")   
 def get_users():
     try:
-       return db_session.query(User).all()
+        return db_session.query(User).all()
     except Exception as e:
-        raise HTTPException(status_code=500,detail="Internal server Exception")
+        raise HTTPException(status_code=500,detail="Internal server error")
 
 @app.get("/login")
 def get_user(user_credentials: LogInSchema) :
@@ -65,4 +66,14 @@ def getProducts():
     try:
         return db_session.query(Product).all()
     except Exception as e:
-        raise HTTPException(status_code=500,detail="Internal server Exception")
+        raise HTTPException(status_code=500,detail="Internal server error")
+    
+@app.get("/prod_category/{category}")
+def get_products_by_category(category:str):
+    try:
+        products =  db_session.query(Product).filter(Product.category == category).all()
+        if not products:
+            raise HTTPException(404,"products Not found")
+        return products
+    except Exception as e:
+        raise HTTPException(status_code=500,detail="internal Server error")

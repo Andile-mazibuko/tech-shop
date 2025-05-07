@@ -59,8 +59,6 @@ export class SignupComponent implements OnInit {
     })
  
   }
-
-  createAccout() {}
   cancel() {
     this.dialogRef.close();
   }
@@ -76,8 +74,6 @@ export class SignupComponent implements OnInit {
         console.log(data);
       });
     }
-  }
-  onChangeLister(){
-    
+    this.cancel()
   }
 }
