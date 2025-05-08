@@ -1,0 +1,27 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+mat-card{
+    margin: 1%;
+    width: 25%;
+    background-color: rgb(73, 80, 87, 0.4) !important;
+}
+mat-card-actions{
+    align-self: flex-end;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+mat-card-actions .add-cart{
+    background-color: green;
+    color: white;
+    margin-right: 10px;
+}
+mat-card-actions .add-wishlist{
+    background-color: palevioletred;
+    color: white;
+}

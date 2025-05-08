@@ -3,9 +3,9 @@ from typing import List
 from urllib import response
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import LogInSchema, ProductSchema, UserSchema
+from schemas import LogInSchema, ProductSchema, UserSchema, WishlistSchema
 from database import Base,SessionLocal,engine
-from models import User,Product,Order,OrderProduct
+from models import User,Product,Order,OrderProduct,WishList
 
 app = FastAPI()
 app.add_middleware(
@@ -80,3 +80,19 @@ def get_products_by_category(category:str):
         return products
     except Exception:
         raise HTTPException(status_code=500,detail="internal Server error")
+
+@app.post("/add_wishlist")
+def add_to_wishlist(data:WishlistSchema):
+    wishlist = WishList(user_id = data.user_id,prod_id=data.prod_id)
+    db_session.add(wishlist)
+    db_session.commit()
+
+"""
+Join Tables and return a list of products
+"""
+@app.get("/wishlist/{user_id}")
+def get_user_wishlist(user_id:int)->List[Product]:
+    try:
+       return db_session.query(Product).join(WishList).filter(Product.prod_id == WishList.prod_id,WishList.user_id == user_id).all()
+    except Exception as e:
+        raise HTTPException(404)

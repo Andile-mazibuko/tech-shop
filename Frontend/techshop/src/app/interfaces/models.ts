@@ -1,4 +1,5 @@
 export interface Product {
+  prod_id?:number
   title: string;
   name: string;
   description: string;
@@ -12,6 +13,7 @@ export interface CategorySum {
 }
 
 export interface User {
+  user_id?: number
   first_name: string;
   last_name: string;
   password: string;
@@ -21,4 +23,8 @@ export interface User {
 export interface LogInInterface{
   email: string,
   password:string
+}
+export interface Wishlist{
+  user_id: number,
+  prod_id: number
 }

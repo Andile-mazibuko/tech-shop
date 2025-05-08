@@ -8,6 +8,13 @@
 mat-card{
     margin: 1%;
     width: 25%;
+    cursor: pointer;
+    background-color: rgb(73, 80, 87, 0.4) !important;
+}
+mat-card:hover{
+    background-color: rgb(73, 80, 87, 1) !important;
+    width: 27%;
+    transition: .1s ease-in-out;
 }
 mat-card-actions{
     align-self: flex-end;

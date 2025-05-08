@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card *ngFor="let product of products">
+  <mat-card *ngFor="let product of products" (click)="viewProduct(product)">
     <mat-card-header><b>{{ product.category }}</b></mat-card-header>
     <img
       mat-card-image

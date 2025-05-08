@@ -64,3 +64,9 @@ class OrderProduct(Base):
     order = relationship("Order",back_populates="order_product")
     order_product = relationship("Product",back_populates="product")
 
+class WishList(Base):
+    __tablename__ = "wishlist"
+    user_id = Column(Integer,ForeignKey("users.user_id"))
+    prod_id = Column(Integer,ForeignKey("products.prod_id"))
+
+    __table_args__ = (PrimaryKeyConstraint('user_id','prod_id'),)

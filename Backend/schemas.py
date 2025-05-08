@@ -20,3 +20,7 @@ class ProductSchema(BaseModel):
     price: float
     category: str
     quantity:int
+
+class WishlistSchema(BaseModel):
+    user_id: int
+    prod_id: int

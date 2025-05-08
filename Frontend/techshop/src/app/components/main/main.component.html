@@ -1,6 +1,6 @@
 <nav>
   <div class="logo">
-    <a href="">
+    <a routerLink="">
       <img src="favicon.ico" alt="" />
     </a>
   </div>
@@ -12,23 +12,27 @@
       </div>
     </form>
   </div>
+
+  <!-- SIGNED IN-->
   <div class="user-actions" *ngIf="user != null">
     <button mat-button type="button" (click)="openAccountInfo($event)">
       <mat-icon>person</mat-icon>
     </button>
-    <button mat-button type="button" (click)="signUp()">
-      <mat-icon>favorite</mat-icon>
+    <button mat-button type="button" >
+      <mat-icon matBadge="0" matBadgeOverlap="true" class="transparent-badge">favorite</mat-icon>
     </button>
-    <button mat-button type="button" (click)="signUp()">
-      <mat-icon>shopping_cart</mat-icon>
+    <button mat-button type="button">
+      <mat-icon [matBadge]="products.length" matBadgeOverlap="true" class="transparent-badge">shopping_cart</mat-icon>
     </button>
     <button mat-button type="button"><mat-icon>dark_mode</mat-icon></button>
   </div>
+
+    <!--NOT SIGNED IN-->
   <div class="user-actions" *ngIf="user == null">
     <button mat-button type="button" (click)="logIn()">
       <mat-icon>login</mat-icon>Log in
     </button>
-    <button mat-button type="button" (click)="signUp()">Sign up</button>
+    <button mat-button type="button" (click)="signUp()"><mat-icon>person_add</mat-icon>Sign up</button>
     <button mat-button type="button"><mat-icon>dark_mode</mat-icon></button>
   </div>
   <div class="user-actions name" *ngIf="user != null">
@@ -41,7 +45,7 @@
   <div class="categories">
     <h1>Shop by category</h1>
     <div class="categories-container">
-      <mat-card class="category" [routerLink]="['/category', 'GPU']">
+      <mat-card class="category" (click)="shopByCatergory('GPU')">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2017/09/29/05/38/pc-2798015_1280.jpg"
@@ -52,7 +56,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="category">
+      <mat-card class="category" (click)="shopByCatergory('CPU')">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2019/08/08/16/56/cpu-4393384_1280.jpg"
@@ -63,7 +67,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="category">
+      <mat-card class="category" (click)="shopByCatergory('Laptop')">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2016/02/17/15/37/laptop-1205256_1280.jpg"
@@ -74,7 +78,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="category">
+      <mat-card class="category" (click)="shopByCatergory('Desktop')">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2021/11/22/14/23/computer-6816638_1280.jpg"
@@ -85,7 +89,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="category">
+      <mat-card class="category" (click)="shopByCatergory('Headset')">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2018/03/27/00/50/child-3264751_1280.jpg"
@@ -96,7 +100,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="category">
+      <mat-card class="category" (click)="shopByCatergory('Keyboard')">
         <img
           mat-card-img
           src="https://cdn.pixabay.com/photo/2020/01/12/08/12/keyboard-4759499_1280.jpg"

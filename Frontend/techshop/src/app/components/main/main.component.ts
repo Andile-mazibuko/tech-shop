@@ -10,6 +10,7 @@ import { Product, User } from '../../interfaces/models';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
 import {
   ActivatedRoute,
   Router,
@@ -19,6 +20,7 @@ import {
 import { globalVars } from '../../../utils/global';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
 import { AccountComponent } from '../account/account.component';
+import { ProductComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-main',
@@ -32,6 +34,7 @@ import { AccountComponent } from '../account/account.component';
     MatCardModule,
     RouterOutlet,
     RouterModule,
+    MatBadgeModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -39,7 +42,6 @@ import { AccountComponent } from '../account/account.component';
 export class MainComponent implements OnInit {
   products: Product[] = [];
   user: User | null = null;
-
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -49,15 +51,14 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('MAIN USER', this.user);
     this.prodServ.getProducts().subscribe((data: Product[]) => {
       this.products = data;
     });
   }
-  signUp() {
+  signUp(): void {
     this.dialog.open(SignupComponent, { width: '600px' });
   }
-  logIn() {
+  logIn(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '1000px',
       height: '500px',
@@ -66,14 +67,25 @@ export class MainComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data: User) => {
       this.user = data;
       if (data.role?.includes('ADMIN')) {
-        globalVars.adminAccess = true
-        globalVars.customerAccess = true
-        this.router.navigate(['/admin'])
+        globalVars.adminAccess = true;
+        globalVars.customerAccess = true;
+        this.router.navigate(['/admin']);
       }
     });
   }
-  openAccountInfo(event: MouseEvent) {
+  openAccountInfo(event: MouseEvent): void {
     const rect = (event.target as HTMLElement).getBoundingClientRect();
-    const dialogRef = this.dialog.open(AccountComponent, { width: '600px' });
+    const dialogRef = this.dialog.open(AccountComponent, {
+      width: '600px',
+      position: {
+        top: `${rect.top + window.scrollY + 70}px`,
+        left: `${rect.left + window.scrollX}px`,
+      },
+    });
+  }
+  shopByCatergory(catergory: string): void {
+    this.router.navigate(['/category', `/${catergory}`], {
+      queryParams: { category: catergory },
+    });
   }
 }
