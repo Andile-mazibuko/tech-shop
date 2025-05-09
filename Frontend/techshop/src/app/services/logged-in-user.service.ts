@@ -6,13 +6,13 @@ import { User } from '../interfaces/models';
   providedIn: 'root'
 })
 export class LoggedInUserService {
-  userSubject = new BehaviorSubject<User|null>(null)
+  userSubject = new BehaviorSubject<User>({email:'',first_name:'',last_name:'',password:''})
   constructor() { }
   
   setLoggedUser(user:User){
     this.userSubject.next(user)
   }
-  getLoggedUser():User|null{
+  getLoggedUser():User{
     return this.userSubject.getValue()
   }
 

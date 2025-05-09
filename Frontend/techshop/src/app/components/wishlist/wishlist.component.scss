@@ -1,0 +1,44 @@
+.close{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.close button{
+    background-color: transparent;
+}
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.wishlist{
+    width: 40%;
+    margin: 1%;
+}
+mat-card{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    
+   
+    overflow: hidden;
+}
+button{
+    background-color: rgb(73, 80, 87, 0.2);
+    margin: 2%;
+    font-size: x-large;
+}
+mat-card-content img{
+    width: 100%;
+    margin: 0 auto;
+}
+.add-cart{
+    color: green
+}
+.delete{
+    color: red;
+}

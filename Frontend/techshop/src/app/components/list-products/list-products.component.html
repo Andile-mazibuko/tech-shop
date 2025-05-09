@@ -1,6 +1,8 @@
 <div class="container">
   <mat-card *ngFor="let product of products" (click)="viewProduct(product)">
-    <mat-card-header><b>{{ product.category }}</b></mat-card-header>
+    <mat-card-header
+      ><b>{{ product.category }}</b></mat-card-header
+    >
     <img
       mat-card-image
       *ngIf="product.category.includes('CPU')"
@@ -38,14 +40,16 @@
       alt=""
     />
     <mat-card-content>
-        <b>{{product.title +" "+ product.name}}</b>
+      <b>{{ product.title + " " + product.name }}</b>
     </mat-card-content>
-    <mat-card-content>
-        R{{product.price}}
-    </mat-card-content>
+    <mat-card-content> R{{ product.price }} </mat-card-content>
     <mat-card-actions>
-        <button mat-button type="button" class="add-cart">Add to cart {{" "}} <mat-icon>add_shopping_cart</mat-icon></button>
-        <button mat-button type="button" class="add-wishlist"><mat-icon>favorite</mat-icon></button>
+      <button (click)="onButtonClick($event,'cart',product)" mat-button type="button" class="add-cart">
+        Add to cart {{ " " }} <mat-icon>add_shopping_cart</mat-icon>
+      </button>
+      <button (click)="onButtonClick($event,'wishlist',product)" mat-button type="button" class="add-wishlist">
+        <mat-icon>favorite</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

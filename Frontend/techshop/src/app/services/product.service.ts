@@ -7,7 +7,7 @@ import { globalVars } from '../../utils/global';
   providedIn: 'root',
 })
 export class ProductService {
-  products: Product[] = [];
+  //products: Product[] = [];
   productSubject = new BehaviorSubject<Product[]>([]);
 
   constructor(private http: HttpClient) {}
@@ -29,7 +29,7 @@ export class ProductService {
   private fetchProducts(): void {
     this.http
       .get<Product[]>(globalVars.apiUrl+'/get_products')
-      .subscribe((data) => {
+      .subscribe((data:Product[]) => {
         this.productSubject.next(data);
       });
   }

@@ -7,19 +7,28 @@
 
 mat-card{
     margin: 1%;
-    width: 25%;
+    width: 15%;
+    cursor: pointer;
     background-color: rgb(73, 80, 87, 0.4) !important;
+}
+mat-card:hover{
+    background-color: rgb(73, 80, 87, 1) !important;
+    width: 16%;
+    transition: .1s ease-in-out;
+    z-index: 0;
 }
 mat-card-actions{
     align-self: flex-end;
     margin-top: auto;
     display: flex;
     justify-content: space-between;
+    z-index: 5;
 }
 mat-card-actions .add-cart{
     background-color: green;
     color: white;
     margin-right: 10px;
+    
 }
 mat-card-actions .add-wishlist{
     background-color: palevioletred;

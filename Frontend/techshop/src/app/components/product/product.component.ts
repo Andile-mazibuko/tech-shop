@@ -1,5 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Product, User, Wishlist } from '../../interfaces/models';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,30 +26,32 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private wishServ: WishlistService,
-    private dialog:MatDialog,
+    private dialog: MatDialog,
     private logServ: LoggedInUserService,
     private dialogRef: MatDialogRef<ProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Product
   ) {}
 
   ngOnInit(): void {
-   this.user = this.logServ.getLoggedUser()
+    this.user = this.logServ.getLoggedUser();
   }
   closeDialog(): void {
     this.dialogRef.close();
   }
   addTowishlist(prod: Product) {
-    if(globalVars.customerAccess){
-      if(this.user?.user_id != null && prod.prod_id != null){
-        const wishlist:Wishlist = {prod_id:prod.prod_id ,user_id:this.user.user_id}
-        this.wishServ.addToWishList(wishlist).subscribe(data =>{
-          console.log("WISHLIST UPDATED")
-        })
-      }else {
-        console.error("ERROROROROROR")
+    if (globalVars.customerAccess) {
+      if (this.user?.user_id != null && prod.prod_id != null) {
+        const wishlist: Wishlist = {
+          prod_id: prod.prod_id,
+          user_id: this.user.user_id,
+        };
+        this.wishServ.addToWishList(wishlist);
       }
-    }else{
-      this.dialog.open(LoginComponent)
+    } else {
+      this.dialog.open(LoginComponent, {
+        width: '1000px',
+        height: '500px',
+      });
     }
   }
 }

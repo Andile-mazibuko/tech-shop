@@ -21,6 +21,8 @@ import { globalVars } from '../../../utils/global';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
 import { AccountComponent } from '../account/account.component';
 import { ProductComponent } from '../product/product.component';
+import { WishlistService } from '../../services/wishlist.service';
+import { WishlistComponent } from '../wishlist/wishlist.component';
 
 @Component({
   selector: 'app-main',
@@ -41,8 +43,10 @@ import { ProductComponent } from '../product/product.component';
 })
 export class MainComponent implements OnInit {
   products: Product[] = [];
-  user: User | null = null;
+  wishlist: Product[] = [];
+  user!: User;
   constructor(
+    private wishServ: WishlistService,
     private router: Router,
     private dialog: MatDialog,
     private prodServ: ProductService,
@@ -58,6 +62,7 @@ export class MainComponent implements OnInit {
   signUp(): void {
     this.dialog.open(SignupComponent, { width: '600px' });
   }
+
   logIn(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '1000px',
@@ -71,6 +76,12 @@ export class MainComponent implements OnInit {
         globalVars.customerAccess = true;
         this.router.navigate(['/admin']);
       }
+      //get wishlist
+      this.wishServ
+        .getUserWishList(this.user.user_id!)
+        .subscribe((data: Product[]) => {
+          this.wishlist = data;
+        });
     });
   }
   openAccountInfo(event: MouseEvent): void {
@@ -87,5 +98,8 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/category', `/${catergory}`], {
       queryParams: { category: catergory },
     });
+  }
+  veiwWishlist():void{
+    this.dialog.open(WishlistComponent,{width:'600px',maxHeight:'500px',data:this.wishlist})
   }
 }

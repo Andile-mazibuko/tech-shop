@@ -1,7 +1,7 @@
 <nav>
   <div class="logo">
     <a routerLink="">
-      <img src="favicon.ico" alt="" />
+      <img src="assets/images/gamer.png" alt="" />
     </a>
   </div>
   <div class="search-bar">
@@ -18,11 +18,11 @@
     <button mat-button type="button" (click)="openAccountInfo($event)">
       <mat-icon>person</mat-icon>
     </button>
-    <button mat-button type="button" >
-      <mat-icon matBadge="0" matBadgeOverlap="true" class="transparent-badge">favorite</mat-icon>
+    <button mat-button type="button" (click)="veiwWishlist()" >
+      <mat-icon [matBadge]="wishlist.length" matBadgeOverlap="true" class="transparent-badge">favorite</mat-icon>
     </button>
     <button mat-button type="button">
-      <mat-icon [matBadge]="products.length" matBadgeOverlap="true" class="transparent-badge">shopping_cart</mat-icon>
+      <mat-icon matBadge="0" matBadgeOverlap="true" class="transparent-badge">shopping_cart</mat-icon>
     </button>
     <button mat-button type="button"><mat-icon>dark_mode</mat-icon></button>
   </div>

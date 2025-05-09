@@ -91,8 +91,15 @@ def add_to_wishlist(data:WishlistSchema):
 Join Tables and return a list of products
 """
 @app.get("/wishlist/{user_id}")
-def get_user_wishlist(user_id:int)->List[Product]:
+def get_user_wishlist(user_id:int):
     try:
        return db_session.query(Product).join(WishList).filter(Product.prod_id == WishList.prod_id,WishList.user_id == user_id).all()
     except Exception as e:
-        raise HTTPException(404)
+        raise HTTPException(500)
+    
+
+@app.delete('/wishlist_delete/{user_id}/{prod_id}')
+def delete_from_wishlist(user_id: int,prod_id:int):
+    wishlist_item = db_session.query(WishList).filter(WishList.user_id == user_id, WishList.prod_id == prod_id).first()
+    db_session.delete(wishlist_item)
+    db_session.commit()
