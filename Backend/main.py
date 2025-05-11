@@ -1,11 +1,8 @@
-from os import name
-from typing import List
-from urllib import response
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import LogInSchema, ProductSchema, UserSchema, WishlistSchema
+from schemas import LogInSchema, ProductSchema, UserSchema, WishlistSchema,CartSchema
 from database import Base,SessionLocal,engine
-from models import User,Product,Order,OrderProduct,WishList
+from models import User,Product,Order,OrderProduct,WishList,Cart,CartProduct
 
 app = FastAPI()
 app.add_middleware(
@@ -49,7 +46,7 @@ def get_user(user_credentials: LogInSchema) :
         else:
             raise HTTPException(404)
     except Exception:
-        raise HTTPException(500)
+        raise HTTPException(500,detail="Invalid login details")
 
 @app.post("/add_product")
 def addProduct(prod: ProductSchema):
@@ -103,3 +100,38 @@ def delete_from_wishlist(user_id: int,prod_id:int):
     wishlist_item = db_session.query(WishList).filter(WishList.user_id == user_id, WishList.prod_id == prod_id).first()
     db_session.delete(wishlist_item)
     db_session.commit()
+
+@app.post("/add_cart/{user_id}/{prod_id}")
+def add_to_cart(user_id:int,prod_id:int):
+    try:
+        user_cart = db_session.query(Cart).filter(Cart.user_id == user_id).first()
+
+        #if cart is empty create a new one
+        if not user_cart:
+            db_session.add(Cart(user_id = user_id,status = "Active"))
+            db_session.commit()
+            new_cart = db_session.query(Cart).filter(Cart.user_id == user_id).first()
+            cart_product = CartProduct(cart_id = new_cart.cart_id,prod_id = prod_id)
+            db_session.add(cart_product)
+            db_session.commit()
+
+        elif user_cart:
+            cart_product = CartProduct(cart_id = user_cart.cart_id,prod_id = prod_id)
+            db_session.add(cart_product)
+            db_session.commit()
+        else:
+            raise HTTPException(500,detail="The server failed to process your request")
+    except Exception as e:
+        raise HTTPException(500)
+    
+
+@app.get("/user_cart/{user_id}")
+def get_user_cart(user_id:int):
+    try:
+        return db_session.query(Product,Cart.status).\
+            join(CartProduct, CartProduct.prod_id ==  Product.prod_id).\
+            join(Cart,Cart.cart_id == CartProduct.cart_id).\
+            filter(Cart.user_id == user_id).all()
+    except Exception as e:
+        raise HTTPException(404, detail="Cart not found")
+    

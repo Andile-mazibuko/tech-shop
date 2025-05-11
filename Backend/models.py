@@ -70,3 +70,17 @@ class WishList(Base):
     prod_id = Column(Integer,ForeignKey("products.prod_id"))
 
     __table_args__ = (PrimaryKeyConstraint('user_id','prod_id'),)
+
+class Cart(Base):
+    __tablename__ = "carts"
+    cart_id = Column(Integer,primary_key=True)
+    user_id = Column(Integer,ForeignKey('users.user_id'),unique=True)
+    status = Column(String)
+
+#JOIN CART AND PRODUCT
+class CartProduct(Base):
+    __tablename__ = "cart_products"
+    cart_id = Column(Integer,ForeignKey("carts.cart_id"))
+    prod_id = Column(Integer,ForeignKey("products.prod_id"))
+
+    __table_args__ = (PrimaryKeyConstraint('cart_id', 'prod_id'),)

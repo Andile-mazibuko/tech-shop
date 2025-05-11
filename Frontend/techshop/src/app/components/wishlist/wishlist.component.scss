@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: end;
+    background-color: rgba(128, 128, 128, 0.527);
 }
 .close button{
     background-color: transparent;
@@ -13,6 +14,7 @@
     flex-wrap: wrap;
     overflow: hidden;
     overflow-y: scroll;
+    background-color: rgba(128, 128, 128, 0.527);
 }
 
 .wishlist{
@@ -23,8 +25,7 @@ mat-card{
     width: 100%;
     display: flex;
     justify-content: left;
-    
-   
+    background-color: rgb(73, 80, 87, 0.4) !important;
     overflow: hidden;
 }
 button{

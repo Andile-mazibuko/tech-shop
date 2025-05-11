@@ -16,6 +16,8 @@ import { SignupComponent } from '../signup/signup.component';
 import { LogInInterface, User } from '../../interfaces/models';
 import { globalVars } from '../../../utils/global';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
+import { catchError, EMPTY } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +42,8 @@ export class LoginComponent {
     private userServ: UserService,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<LoginComponent>,
-    private loggedUser: LoggedInUserService
+    private loggedUser: LoggedInUserService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -55,10 +58,24 @@ export class LoginComponent {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
     };
-    this.userServ.login(LOGIN_DETAILTS).subscribe((data: User) => {
-      this.loggedUser.setLoggedUser(data);
-      this.dialogRef.close(data);
-    });
+    this.userServ
+      .login(LOGIN_DETAILTS)
+      .pipe(
+        catchError((err) => {
+
+          if(err.status == 500){
+            //Display error on the snack bar
+          this.openSnackBar("Internal Server error");
+          }
+          
+
+          return EMPTY;
+        })
+      )
+      .subscribe((data: User) => {
+        this.loggedUser.setLoggedUser(data);
+        this.dialogRef.close(data);
+      });
 
     globalVars.customerAccess = true;
   }
@@ -68,5 +85,13 @@ export class LoginComponent {
   }
   close() {
     this.dialogRef.close();
+  }
+  
+  openSnackBar(msg: string) {
+    this.snackBar.open(msg,'close',{
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    })
   }
 }

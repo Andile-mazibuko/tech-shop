@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel
 
 class UserSchema(BaseModel):
@@ -24,3 +24,7 @@ class ProductSchema(BaseModel):
 class WishlistSchema(BaseModel):
     user_id: int
     prod_id: int
+
+class CartSchema(BaseModel):
+    user_id: int
+    product: List[ProductSchema]
