@@ -3,17 +3,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoggedInUserService {
-  userSubject = new BehaviorSubject<User>({email:'',first_name:'',last_name:'',password:''})
-  constructor() { }
-  
-  setLoggedUser(user:User){
-    this.userSubject.next(user)
-  }
-  getLoggedUser():User{
-    return this.userSubject.getValue()
-  }
+  userSubject = new BehaviorSubject<User | null>(null);
+  constructor() {}
 
+  setLoggedUser(user: User | null) {
+    this.userSubject.next(user);
+  }
+  getLoggedUser(): User | null {
+    return this.userSubject.getValue();
+  }
 }

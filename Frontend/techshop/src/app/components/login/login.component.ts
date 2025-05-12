@@ -16,8 +16,10 @@ import { SignupComponent } from '../signup/signup.component';
 import { LogInInterface, User } from '../../interfaces/models';
 import { globalVars } from '../../../utils/global';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
-import { catchError, EMPTY } from 'rxjs';
+import { EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +45,7 @@ export class LoginComponent {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<LoginComponent>,
     private loggedUser: LoggedInUserService,
-    private snackBar: MatSnackBar
+    private snackBar: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -62,19 +64,19 @@ export class LoginComponent {
       .login(LOGIN_DETAILTS)
       .pipe(
         catchError((err) => {
-
-          if(err.status == 500){
+          if (err.status == 500) {
             //Display error on the snack bar
-          this.openSnackBar("Internal Server error");
+            this.snackBar.openSnackBar('Incorrect Log in credentials');
+          } else if (err.status == 404) {
+            this.snackBar.openSnackBar("Account not Found")
           }
-          
-
           return EMPTY;
         })
       )
       .subscribe((data: User) => {
         this.loggedUser.setLoggedUser(data);
         this.dialogRef.close(data);
+        this.snackBar.openSnackBar('You have logged in successfully');
       });
 
     globalVars.customerAccess = true;
@@ -86,12 +88,5 @@ export class LoginComponent {
   close() {
     this.dialogRef.close();
   }
-  
-  openSnackBar(msg: string) {
-    this.snackBar.open(msg,'close',{
-      duration: 5000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    })
-  }
+
 }

@@ -21,8 +21,8 @@
     <button mat-button type="button" (click)="veiwWishlist()" >
       <mat-icon [matBadge]="wishlist.length" matBadgeOverlap="true" class="transparent-badge">favorite</mat-icon>
     </button>
-    <button mat-button type="button">
-      <mat-icon matBadge="0" matBadgeOverlap="true" class="transparent-badge">shopping_cart</mat-icon>
+    <button mat-button type="button" (click)="viewCart()">
+      <mat-icon [matBadge]="cart.length" matBadgeOverlap="true" class="transparent-badge">shopping_cart</mat-icon>
     </button>
     <button mat-button type="button"><mat-icon>dark_mode</mat-icon></button>
   </div>
@@ -37,7 +37,7 @@
   </div>
   <div class="user-actions name" *ngIf="user != null">
     <b>{{user.first_name.substring(0,1)+". "+user.last_name}}</b>
-    <button mat-button>Logout<mat-icon matSuffix>logout</mat-icon></button>
+    <button mat-button (click)="logout()">Logout<mat-icon matSuffix>logout</mat-icon></button>
   </div>
 </nav>
 

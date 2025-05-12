@@ -23,6 +23,7 @@ import { AccountComponent } from '../account/account.component';
 import { ProductComponent } from '../product/product.component';
 import { WishlistService } from '../../services/wishlist.service';
 import { WishlistComponent } from '../wishlist/wishlist.component';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-main',
@@ -44,13 +45,15 @@ import { WishlistComponent } from '../wishlist/wishlist.component';
 export class MainComponent implements OnInit {
   products: Product[] = [];
   wishlist: Product[] = [];
-  user!: User;
+  cart: Product[] = [];
+  user!: User | null;
+
   constructor(
     private wishServ: WishlistService,
+    private cartServ: CartService,
     private router: Router,
     private dialog: MatDialog,
     private prodServ: ProductService,
-    private route: ActivatedRoute,
     private logServ: LoggedInUserService
   ) {}
 
@@ -82,6 +85,10 @@ export class MainComponent implements OnInit {
         .subscribe((data: Product[]) => {
           this.wishlist = data;
         });
+        //get cart
+        this.cartServ.getUserCart(this.user!.user_id!).subscribe((data :Product[]) =>{
+          this.cart = data
+        })
     });
   }
   openAccountInfo(event: MouseEvent): void {
@@ -99,7 +106,22 @@ export class MainComponent implements OnInit {
       queryParams: { category: catergory },
     });
   }
-  veiwWishlist():void{
-    this.dialog.open(WishlistComponent,{width:'600px',maxHeight:'500px',data:this.wishlist})
+  veiwWishlist(): void {
+    this.dialog.open(WishlistComponent, {
+      width: '600px',
+      maxHeight: '500px',
+      data: this.wishlist,
+    });
+  }
+  viewCart(){
+    this.dialog.open(WishlistComponent, {
+      width: '600px',
+      maxHeight: '500px',
+      data: this.wishlist,
+    });
+  }
+  logout() {
+    this.user = null;
+    this.logServ.setLoggedUser(null);
   }
 }

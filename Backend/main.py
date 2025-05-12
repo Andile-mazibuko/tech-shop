@@ -128,7 +128,7 @@ def add_to_cart(user_id:int,prod_id:int):
 @app.get("/user_cart/{user_id}")
 def get_user_cart(user_id:int):
     try:
-        return db_session.query(Product,Cart.status).\
+        return db_session.query(Product).\
             join(CartProduct, CartProduct.prod_id ==  Product.prod_id).\
             join(Cart,Cart.cart_id == CartProduct.cart_id).\
             filter(Cart.user_id == user_id).all()
