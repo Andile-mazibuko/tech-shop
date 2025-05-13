@@ -1,5 +1,6 @@
 from typing import List, Optional
 from pydantic import BaseModel
+from datetime import date
 
 class UserSchema(BaseModel):
     first_name: str
@@ -25,6 +26,10 @@ class WishlistSchema(BaseModel):
     user_id: int
     prod_id: int
 
-class CartSchema(BaseModel):
+class OrderSchema(BaseModel):
+    order_id: Optional[int] = None
     user_id: int
-    product: List[ProductSchema]
+    status: Optional[str] = None
+    date: Optional[str] = None
+    total: float
+    products: List[ProductSchema]

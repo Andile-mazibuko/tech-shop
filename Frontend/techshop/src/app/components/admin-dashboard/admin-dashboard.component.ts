@@ -8,8 +8,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { MatTableModule } from '@angular/material/table';
-import { Product } from '../../interfaces/models';
+import { Order, Product, User } from '../../interfaces/models';
 import { ProductService } from '../../services/product.service';
+import { OrderService } from '../../services/order.service';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
@@ -28,7 +30,11 @@ import { ProductService } from '../../services/product.service';
 })
 export class AdminDashboardComponent implements OnInit {
   isOpen = true;
-  products: Product[] = []
+  products: Product[] = [];
+  orders: Order[] = [];
+  users: User[] = []
+  revenue: number = 0
+
   displayedColumns: string[] = ['order_id', 'owner', 'status', 'total'];
   dataSource = [
     {
@@ -60,18 +66,28 @@ export class AdminDashboardComponent implements OnInit {
       owner: 'ruben@gmail.com',
       status: 'in transit',
       total: 'R1299,99',
-    }
+    },
   ];
-  constructor(private dialog: MatDialog,private prodServ: ProductService) {}
-  
+  constructor(
+    private orderServ: OrderService,
+    private dialog: MatDialog,
+    private prodServ: ProductService,
+    private userServ: UserService
+  ) {}
+
   ngOnInit(): void {
-    this.prodServ.getProducts().subscribe(data =>{
-      this.products = data
+    this.prodServ.getProducts().subscribe((data) => {
+      this.products = data;
+    });
+    this.orderServ.getOrders().subscribe((data: Order[])=>{
+      this.orders = data
+      this.calculateAmtGenerated()
+    })
+    this.userServ.getUsers().subscribe((data: User[])=>{
+      this.users = data
     })
   }
-  ngAfterViewInit(): void{
-    
-  }
+  ngAfterViewInit(): void {}
 
   widthToggle(): void {
     this.isOpen = !this.isOpen;
@@ -79,5 +95,10 @@ export class AdminDashboardComponent implements OnInit {
   addProduct() {
     this.dialog.open(AddProductComponent, { width: '600px' });
   }
-  
+  calculateAmtGenerated():void{
+    this.orders.forEach(order => {
+      this.revenue +=order.total
+    });
+  }
+
 }

@@ -42,15 +42,15 @@ class Order(Base):
     user_id = Column(Integer, ForeignKey("users.user_id"))
     status = Column(String)
     date= Column(Date)
-
+    total = Column(Float,nullable=False)
     #Relationships
     owner = relationship("User",back_populates="user_order")
     order_product = relationship("OrderProduct",back_populates="order")
 
-    def __init__(self,user_id:int,status:str = "payment recieved",date = Date()):
+    def __init__(self,user_id:int,total: float,status:str = "payment recieved"):
         self.user_id = user_id
         self.status = status
-        self.date = date
+        self.total = total
 
 
 #join ORDER and products

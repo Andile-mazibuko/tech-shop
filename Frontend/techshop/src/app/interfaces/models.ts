@@ -28,3 +28,12 @@ export interface Wishlist{
   user_id: number,
   prod_id: number
 }
+export interface Order{
+  order_id?: number,
+  user_id: number,
+  status?: string,
+  date?: string,
+  total: number,
+  products: Product[]
+}
+    
