@@ -24,6 +24,7 @@ import { ProductComponent } from '../product/product.component';
 import { WishlistService } from '../../services/wishlist.service';
 import { WishlistComponent } from '../wishlist/wishlist.component';
 import { CartService } from '../../services/cart.service';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-main',
@@ -114,13 +115,14 @@ export class MainComponent implements OnInit {
     });
   }
   viewCart(){
-    this.dialog.open(WishlistComponent, {
+    this.dialog.open(CartComponent, {
       width: '600px',
       maxHeight: '500px',
-      data: this.wishlist,
+      data: this.cart,
     });
   }
   logout() {
+    globalVars.customerAccess = false
     this.user = null;
     this.logServ.setLoggedUser(null);
   }

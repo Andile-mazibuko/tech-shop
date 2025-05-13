@@ -134,4 +134,21 @@ def get_user_cart(user_id:int):
             filter(Cart.user_id == user_id).all()
     except Exception as e:
         raise HTTPException(404, detail="Cart not found")
-    
+
+@app.delete("/delete_cart/{user_id}/{prod_id}")
+def delete_from_cart(user_id:int,prod_id:int):
+    try:
+        #1- Find user cart
+        user_cart = db_session.query(Cart).filter(Cart.user_id == user_id).first()
+        if user_cart:
+            #2- Find product from the cart
+            user_product = db_session.query(CartProduct).filter(CartProduct.cart_id == user_cart.cart_id,CartProduct.prod_id == prod_id).first()
+            #3- Delete product
+            db_session.delete(user_product)
+        else:
+            raise HTTPException(404,"CART Not Found")
+        
+        #4- update changes
+        db_session.commit()
+    except Exception as e:
+        raise HTTPException(500)

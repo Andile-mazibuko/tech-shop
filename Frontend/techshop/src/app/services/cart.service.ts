@@ -11,7 +11,7 @@ export class CartService {
   cartSubject = new BehaviorSubject<Product[]>([]);
   constructor(private http: HttpClient) {}
 
-  addToCart(user_product: Wishlist) {
+  addToCart(user_product: Wishlist): void {
     this.http
       .post(
         `${globalVars.apiUrl}/add_cart/${user_product.user_id}/${user_product.prod_id}`,
@@ -26,9 +26,16 @@ export class CartService {
     this.refreshCart(user_id);
     return this.cartSubject;
   }
+  deleteFromCart(user_id: number, prod_id: number): void {
+    this.http
+      .delete(`${globalVars.apiUrl}/delete_cart/${user_id}/${prod_id}`)
+      .subscribe((data) => {
+        this.refreshCart(user_id);
+      });
+  }
 
   //Helper method to refresh cart
-  refreshCart(user_id: number) {
+  private refreshCart(user_id: number): void {
     this.http
       .get<Product[]>(`${globalVars.apiUrl}/user_cart/${user_id}`)
       .subscribe((data: Product[]) => {
