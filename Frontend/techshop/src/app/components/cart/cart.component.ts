@@ -9,7 +9,6 @@ import { CartService } from '../../services/cart.service';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
 import { OrderService } from '../../services/order.service';
 
-
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -20,6 +19,7 @@ import { OrderService } from '../../services/order.service';
 export class CartComponent implements OnInit {
   total = 0;
   user: User | null = null;
+
   constructor(
     private logServ: LoggedInUserService,
     private orderServ: OrderService,
@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
     private dialogRef: MatDialogRef<CartComponent>,
     @Inject(MAT_DIALOG_DATA) public cartProducts: Product[]
   ) {}
+
   ngOnInit(): void {
     this.user = this.logServ.getLoggedUser();
     this.getTotalAmount();
@@ -35,11 +36,13 @@ export class CartComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
   }
+
   getTotalAmount(): void {
     this.cartProducts.forEach((product) => {
       this.total += product.price;
     });
   }
+
   removeItemFromCart(prod: Product) {
     this.cartServ.deleteFromCart(this.user!.user_id!, prod.prod_id!);
     this.total = Math.round((this.total -= prod.price) * 100) / 100;
@@ -50,15 +53,15 @@ export class CartComponent implements OnInit {
         this.cartProducts = data;
       });
   }
+
   checkOutItems(): void {
     const order: Order = {
       user_id: this.user?.user_id!,
       products: this.cartProducts,
       total: this.total,
     };
-    this.orderServ.createOrder(order).subscribe(data =>{})
+    this.orderServ.createOrder(order).subscribe((data) => {});
 
     //drop products on the cart
-    
   }
 }
