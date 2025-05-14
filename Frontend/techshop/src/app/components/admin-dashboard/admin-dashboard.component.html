@@ -7,7 +7,7 @@
     [ngClass]="isOpen ? 'default-sidenav' : 'small-sidenav'"
   >
     <div class="logo">
-      <img src="favicon.ico" alt="" />
+      <img src="assets/images/gamer.png" alt="" />
     </div>
     <button class="tab">
       <mat-icon>home</mat-icon>
@@ -26,9 +26,15 @@
       <mat-icon>person</mat-icon>
       <span [ngClass]="isOpen ? 'text-open' : 'text-closed'"> Account</span>
     </a>
+    <a class="tab" routerLink="orders">
+      <mat-icon>inventory</mat-icon>
+      <span [ngClass]="isOpen ? 'text-open' : 'text-closed'">
+        Manage orders</span
+      >
+    </a>
     <button class="tab">
       <mat-icon>dataset</mat-icon
-        ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Tables</span>
+      ><span [ngClass]="isOpen ? 'text-open' : 'text-closed'">Tables</span>
     </button>
   </mat-sidenav>
 

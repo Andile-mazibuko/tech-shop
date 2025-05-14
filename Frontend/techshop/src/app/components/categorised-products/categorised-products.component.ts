@@ -10,22 +10,25 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-categorised-products',
   standalone: true,
-  imports: [MatCardModule, CommonModule,MatIconModule,MatButtonModule],
+  imports: [MatCardModule, CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './categorised-products.component.html',
   styleUrl: './categorised-products.component.scss',
 })
 export class CategorisedProductsComponent implements OnInit {
   products: Product[] = [];
+
   constructor(
     private prodServ: ProductService,
     private activeRoute: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
-    
-    this.activeRoute.queryParams.subscribe(data => {
-      this.prodServ.getProductsByCategory(data['category']).subscribe((data: Product[]) => {
-        this.products = data;
-      });
+    this.activeRoute.queryParams.subscribe((data) => {
+      this.prodServ
+        .getProductsByCategory(data['category'])
+        .subscribe((data: Product[]) => {
+          this.products = data;
+        });
     });
   }
 }

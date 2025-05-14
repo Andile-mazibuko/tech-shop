@@ -1,7 +1,7 @@
 <div class="close">
-    <button type="button" mat-button (click)="closeDialog()">
-        <mat-icon>close</mat-icon>
-    </button>
+  <button type="button" mat-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
 <div class="container">
   <div class="wishlist" *ngFor="let prod of wishlist">
@@ -10,50 +10,55 @@
         {{ prod.name }}
       </mat-card-header>
 
-        <img
-          *ngIf="prod.category == 'CPU'"
-          mat-card-image
-          src="https://cdn.pixabay.com/photo/2019/08/08/16/56/cpu-4393384_1280.jpg"
-          alt=""
-        />
-        <img
-          *ngIf="prod.category == 'GPU'"
-          mat-card-image
-          src="https://cdn.pixabay.com/photo/2017/09/29/05/38/pc-2798015_1280.jpg"
-          alt=""
-        />
-        <img
-          *ngIf="prod.category == 'Laptop'"
-          mat-card-image
-          src="https://cdn.pixabay.com/photo/2016/02/17/15/37/laptop-1205256_1280.jpg"
-          alt=""
-        />
-        <img
-          *ngIf="prod.category == 'Desktop'"
-          mat-card-image
-          src="https://cdn.pixabay.com/photo/2021/11/22/14/23/computer-6816638_1280.jpg"
-          alt=""
-        />
+      <img
+        *ngIf="prod.category == 'CPU'"
+        mat-card-image
+        src="https://cdn.pixabay.com/photo/2019/08/08/16/56/cpu-4393384_1280.jpg"
+        alt=""
+      />
+      <img
+        *ngIf="prod.category == 'GPU'"
+        mat-card-image
+        src="https://cdn.pixabay.com/photo/2017/09/29/05/38/pc-2798015_1280.jpg"
+        alt=""
+      />
+      <img
+        *ngIf="prod.category == 'Laptop'"
+        mat-card-image
+        src="https://cdn.pixabay.com/photo/2016/02/17/15/37/laptop-1205256_1280.jpg"
+        alt=""
+      />
+      <img
+        *ngIf="prod.category == 'Desktop'"
+        mat-card-image
+        src="https://cdn.pixabay.com/photo/2021/11/22/14/23/computer-6816638_1280.jpg"
+        alt=""
+      />
 
-        <img
-          *ngIf="prod.category == 'Headset'"
-          mat-card-image
-          src="https://cdn.pixabay.com/photo/2018/03/27/00/50/child-3264751_1280.jpg"
-          alt=""
-        />
-        <img
-          *ngIf="prod.category == 'Keyboard'"
-          mat-card-image
-          src="https://cdn.pixabay.com/photo/2020/01/12/08/12/keyboard-4759499_1280.jpg"
-          alt=""
-        />
-        R{{ prod.price }}
+      <img
+        *ngIf="prod.category == 'Headset'"
+        mat-card-image
+        src="https://cdn.pixabay.com/photo/2018/03/27/00/50/child-3264751_1280.jpg"
+        alt=""
+      />
+      <img
+        *ngIf="prod.category == 'Keyboard'"
+        mat-card-image
+        src="https://cdn.pixabay.com/photo/2020/01/12/08/12/keyboard-4759499_1280.jpg"
+        alt=""
+      />
+      R{{ prod.price }}
 
       <mat-card-actions>
         <button mat-button type="button" class="add-cart">
           <mat-icon>shopping_cart</mat-icon>
         </button>
-        <button mat-button type="button" class="delete" (click)="deleteProductWishlist(prod)">
+        <button
+          mat-button
+          type="button"
+          class="delete"
+          (click)="deleteProductWishlist(prod)"
+        >
           <mat-icon>delete_forever</mat-icon>
         </button>
       </mat-card-actions>

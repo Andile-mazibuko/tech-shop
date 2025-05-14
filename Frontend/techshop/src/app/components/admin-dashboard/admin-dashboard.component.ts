@@ -32,8 +32,8 @@ export class AdminDashboardComponent implements OnInit {
   isOpen = true;
   products: Product[] = [];
   orders: Order[] = [];
-  users: User[] = []
-  revenue: number = 0
+  users: User[] = [];
+  revenue: number = 0;
 
   displayedColumns: string[] = ['order_id', 'owner', 'status', 'total'];
   dataSource = [
@@ -68,6 +68,7 @@ export class AdminDashboardComponent implements OnInit {
       total: 'R1299,99',
     },
   ];
+
   constructor(
     private orderServ: OrderService,
     private dialog: MatDialog,
@@ -79,26 +80,26 @@ export class AdminDashboardComponent implements OnInit {
     this.prodServ.getProducts().subscribe((data) => {
       this.products = data;
     });
-    this.orderServ.getOrders().subscribe((data: Order[])=>{
-      this.orders = data
-      this.calculateAmtGenerated()
-    })
-    this.userServ.getUsers().subscribe((data: User[])=>{
-      this.users = data
-    })
+    this.orderServ.getOrders().subscribe((data: Order[]) => {
+      this.orders = data;
+      this.calculateAmtGenerated();
+    });
+    this.userServ.getUsers().subscribe((data: User[]) => {
+      this.users = data;
+    });
   }
-  ngAfterViewInit(): void {}
 
   widthToggle(): void {
     this.isOpen = !this.isOpen;
   }
+
   addProduct() {
     this.dialog.open(AddProductComponent, { width: '600px' });
   }
-  calculateAmtGenerated():void{
-    this.orders.forEach(order => {
-      this.revenue +=order.total
+
+  calculateAmtGenerated(): void {
+    this.orders.forEach((order) => {
+      this.revenue += order.total;
     });
   }
-
 }

@@ -1,26 +1,26 @@
-.form-container{
-    width: 100%;
+.form-container {
+  width: 100%;
 }
-form{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 5%;
+form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5%;
 }
-mat-form-field{
-    width: 80%;
-    margin-left: 10%;
+mat-form-field {
+  width: 80%;
+  margin-left: 10%;
 }
-.btns-cont{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 5%;
+.btns-cont {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5%;
 }
-button{
-    width: 100px;
-    height: 35px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
+button {
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
 }

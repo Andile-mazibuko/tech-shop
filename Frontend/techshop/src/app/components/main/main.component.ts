@@ -25,6 +25,7 @@ import { WishlistService } from '../../services/wishlist.service';
 import { WishlistComponent } from '../wishlist/wishlist.component';
 import { CartService } from '../../services/cart.service';
 import { CartComponent } from '../cart/cart.component';
+import { ComponentType } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-main',
@@ -63,14 +64,68 @@ export class MainComponent implements OnInit {
       this.products = data;
     });
   }
+
   signUp(): void {
-    this.dialog.open(SignupComponent, { width: '600px' });
+    this.handleUserAuth(SignupComponent, '600px');
   }
 
   logIn(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      width: '1000px',
-      height: '500px',
+    this.handleUserAuth(LoginComponent, '1000px', '500px');
+  }
+
+  openAccountInfo(event: MouseEvent): void {
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
+    this.dialog.open(AccountComponent, {
+      width: '600px',
+      position: {
+        top: `${rect.top + window.scrollY + 70}px`,
+        left: `${rect.left + window.scrollX}px`,
+      },
+    });
+  }
+
+  shopByCatergory(catergory: string): void {
+    this.router.navigate(['/category', `/${catergory}`], {
+      queryParams: { category: catergory },
+    });
+  }
+
+  veiwWishlist(): void {
+    this.dialog.open(WishlistComponent, {
+      width: '600px',
+      maxHeight: '500px',
+      data: this.wishlist,
+    });
+  }
+
+  viewCart() {
+    this.dialog.open(CartComponent, {
+      width: '600px',
+      maxHeight: '500px',
+      data: this.cart,
+    });
+  }
+
+  logout() {
+    globalVars.customerAccess = false;
+    this.user = null;
+    this.logServ.setLoggedUser(null);
+  }
+
+  /**
+   * returns data to the main component after the component has been closed
+   * @param component - Component to be opened
+   * @param width - width of the dialog box
+   * @param height - height of the dialog box
+   */
+  handleUserAuth(
+    component: ComponentType<unknown>,
+    width: string,
+    height: string = 'auto'
+  ) {
+    const dialogRef = this.dialog.open(component, {
+      width: width,
+      height: height,
     });
 
     dialogRef.afterClosed().subscribe((data: User) => {
@@ -80,50 +135,20 @@ export class MainComponent implements OnInit {
         globalVars.customerAccess = true;
         this.router.navigate(['/admin']);
       }
+
       //get wishlist
       this.wishServ
         .getUserWishList(this.user.user_id!)
         .subscribe((data: Product[]) => {
           this.wishlist = data;
         });
-        //get cart
-        this.cartServ.getUserCart(this.user!.user_id!).subscribe((data :Product[]) =>{
-          this.cart = data
-        })
+
+      //get cart
+      this.cartServ
+        .getUserCart(this.user!.user_id!)
+        .subscribe((data: Product[]) => {
+          this.cart = data;
+        });
     });
-  }
-  openAccountInfo(event: MouseEvent): void {
-    const rect = (event.target as HTMLElement).getBoundingClientRect();
-    const dialogRef = this.dialog.open(AccountComponent, {
-      width: '600px',
-      position: {
-        top: `${rect.top + window.scrollY + 70}px`,
-        left: `${rect.left + window.scrollX}px`,
-      },
-    });
-  }
-  shopByCatergory(catergory: string): void {
-    this.router.navigate(['/category', `/${catergory}`], {
-      queryParams: { category: catergory },
-    });
-  }
-  veiwWishlist(): void {
-    this.dialog.open(WishlistComponent, {
-      width: '600px',
-      maxHeight: '500px',
-      data: this.wishlist,
-    });
-  }
-  viewCart(){
-    this.dialog.open(CartComponent, {
-      width: '600px',
-      maxHeight: '500px',
-      data: this.cart,
-    });
-  }
-  logout() {
-    globalVars.customerAccess = false
-    this.user = null;
-    this.logServ.setLoggedUser(null);
   }
 }

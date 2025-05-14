@@ -7,6 +7,7 @@ import { ListProductsComponent } from './components/list-products/list-products.
 import { CategorisedProductsComponent } from './components/categorised-products/categorised-products.component';
 import { adminAuthGuard } from './guards/admin-auth.guard';
 import { authGuard } from './guards/auth.guard';
+import { ListOrdersComponent } from './components/list-orders/list-orders.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
       { path: '', component: StatsComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'account', component: AccountComponent },
+      { path: 'orders', component: ListOrdersComponent },
     ],
     canActivate: [adminAuthGuard, authGuard],
   },

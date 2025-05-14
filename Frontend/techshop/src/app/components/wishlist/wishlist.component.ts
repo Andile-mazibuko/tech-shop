@@ -30,9 +30,11 @@ export class WishlistComponent {
   ngOnInit(): void {
     this.user = this.logServ.getLoggedUser();
   }
+
   closeDialog(): void {
     this.dialogRef.close();
   }
+
   /**
    * Delete product from user wishlist
    * @param prod - product to be deleted from user wishlist

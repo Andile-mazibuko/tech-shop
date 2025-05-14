@@ -1,57 +1,61 @@
-
 <div class="container">
-    <div class="cancel-btn">
-        <button mat-button type="button" (click)="closeDialog()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
-    <h1>{{ data.name }}</h1>
-    <div class="img-area">
-        <img
+  <div class="cancel-btn">
+    <button mat-button type="button" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h1>{{ data.name }}</h1>
+  <div class="img-area">
+    <img
       *ngIf="data.category == 'CPU'"
-      
       src="https://cdn.pixabay.com/photo/2019/08/08/16/56/cpu-4393384_1280.jpg"
       alt=""
     />
     <img
       *ngIf="data.category == 'GPU'"
-      
       src="https://cdn.pixabay.com/photo/2017/09/29/05/38/pc-2798015_1280.jpg"
       alt=""
     />
     <img
       *ngIf="data.category == 'Laptop'"
-      
       src="https://cdn.pixabay.com/photo/2016/02/17/15/37/laptop-1205256_1280.jpg"
       alt=""
     />
     <img
       *ngIf="data.category == 'Desktop'"
-      
       src="https://cdn.pixabay.com/photo/2021/11/22/14/23/computer-6816638_1280.jpg"
       alt=""
     />
 
     <img
       *ngIf="data.category == 'Headset'"
-      
       src="https://cdn.pixabay.com/photo/2018/03/27/00/50/child-3264751_1280.jpg"
       alt=""
     />
     <img
       *ngIf="data.category == 'Keyboard'"
-      
       src="https://cdn.pixabay.com/photo/2020/01/12/08/12/keyboard-4759499_1280.jpg"
       alt=""
     />
-    </div>
-    <div class="description">
-        {{data.description}}
-    </div>
-    <div class="btns">
-        <button mat-button type="button" class="add-cart">Add to cart {{" "}} <mat-icon>add_shopping_cart</mat-icon></button>
-        <button mat-button type="button" class="add-wishlist" (click)="addTowishlist(data)"><mat-icon>favorite</mat-icon></button>
-    </div>
-    <div class="price"><b>R{{ data.price }}</b><small> incl VAT</small></div>
-    
+  </div>
+  <div class="description">
+    {{ data.description }}
+  </div>
+  <div class="btns">
+    <button mat-button type="button" class="add-cart">
+      Add to cart {{ " " }} <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+    <button
+      mat-button
+      type="button"
+      class="add-wishlist"
+      (click)="addTowishlist(data)"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
+  <div class="price">
+    <b>R{{ data.price }}</b
+    ><small> incl VAT</small>
+  </div>
 </div>

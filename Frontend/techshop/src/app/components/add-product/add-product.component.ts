@@ -40,7 +40,7 @@ export class AddProductComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      quantity: ['',Validators.required],
+      quantity: ['', Validators.required],
       category: ['', Validators.required],
     });
   }
@@ -48,6 +48,7 @@ export class AddProductComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
+
   createProduct() {
     const product: Product = {
       title: this.addProdFormGroup.get('title')?.value,

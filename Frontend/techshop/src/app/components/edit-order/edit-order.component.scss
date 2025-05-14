@@ -1,0 +1,15 @@
+form {
+  width: 90%;
+  display: grid;
+  justify-content: center;
+  margin: 5%;
+}
+.submit {
+  background-color: rgba(107, 137, 255, 0.837);
+  color: white !important;
+}
+.close {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}

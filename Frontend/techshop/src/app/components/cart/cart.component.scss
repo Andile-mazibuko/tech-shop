@@ -1,29 +1,29 @@
-.container{
-    width: 100%;
-    background-color: rgba(128, 128, 128, 0.527);
+.container {
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.527);
 }
-.close{
-    width: 100%;
-    display: flex;
-    justify-content: end;
+.close {
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }
-mat-card{
-    width: 94%;
-    margin: 0 auto;
-    margin-bottom: 1%;
-    background-color: rgb(73, 80, 87, 0.4) !important;
+mat-card {
+  width: 94%;
+  margin: 0 auto;
+  margin-bottom: 1%;
+  background-color: rgb(73, 80, 87, 0.4) !important;
 }
-.card-content{
-    display: flex;
-    justify-content: space-between;
+.card-content {
+  display: flex;
+  justify-content: space-between;
 }
-.container .submit{
-    width: 80%;
-    background-color: rgb(76, 139, 255);
-    margin-left: 10%;
-    margin-bottom: 2%;
-    color: white;
+.container .submit {
+  width: 80%;
+  background-color: rgb(76, 139, 255);
+  margin-left: 10%;
+  margin-bottom: 2%;
+  color: white;
 }
-.delete-btn{
-    color: red;
+.delete-btn {
+  color: red;
 }

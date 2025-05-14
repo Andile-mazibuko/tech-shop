@@ -1,0 +1,17 @@
+<div class="close">
+  <button mat-button type="button" (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form action="" (ngSubmit)="updateStatus()">
+  <mat-form-field>
+    <mat-label>update status</mat-label>
+    <mat-select [(ngModel)]="status_update" name="status_update">
+      <mat-option value="payment recived"> payement recieved </mat-option>
+      <mat-option value="processing"> processing </mat-option>
+      <mat-option value="Ready for shipping"> Ready for shipping </mat-option>
+      <mat-option value="Out for delivery"> Out for delivery </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button type="submit" class="submit">edit</button>
+</form>

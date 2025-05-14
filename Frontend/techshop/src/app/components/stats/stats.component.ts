@@ -37,6 +37,7 @@ export class StatsComponent implements OnInit {
     });
     this.categorySummary = this.fetchCategories();
   }
+ 
   ngAfterViewInit(): void {
     this.createLineChart();
     this.createDoughnut();
@@ -143,6 +144,7 @@ export class StatsComponent implements OnInit {
     }
     return summary;
   }
+
   /**
    *
    * @param category category of products e.g GPU, Desktop, Laptop etc

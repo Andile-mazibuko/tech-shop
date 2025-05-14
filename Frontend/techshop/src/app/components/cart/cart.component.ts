@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
 
   getTotalAmount(): void {
     this.cartProducts.forEach((product) => {
-      this.total += product.price;
+      this.total = Math.round((this.total += product.price));
     });
   }
 

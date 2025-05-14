@@ -1,58 +1,56 @@
-.container{
-    width: 100%;
-    height: 100%;
+.container {
+  width: 100%;
+  height: 100%;
 }
-.cancel-btn{
-    width: 100%;
-    display: flex;
-    justify-content: right;
-
+.cancel-btn {
+  width: 100%;
+  display: flex;
+  justify-content: right;
 }
-h1{
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+h1 {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
-.img-area{
-    width:98%;
-    margin-left: 1%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.img-area {
+  width: 98%;
+  margin-left: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-img{
-    width: 100%;
+img {
+  width: 100%;
 }
-.description{
-    width: 50%;
-    margin: 0 auto;
-
+.description {
+  width: 50%;
+  margin: 0 auto;
 }
-.add-cart{
-    background-color: green;
-    color: white;
-    margin-right: 10px;
+.add-cart {
+  background-color: green;
+  color: white;
+  margin-right: 10px;
 }
-.btns{
-    width: 50%;
-    margin: 10px 0px;
-    display: flex;
-    justify-content: center;
-    position: relative;
+.btns {
+  width: 50%;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
-.add-wishlist{
-    background-color: palevioletred;
-    color: white;
+.add-wishlist {
+  background-color: palevioletred;
+  color: white;
 }
-.price{
-    width: 30%;
-    position: relative;
-    float: right;
-    font-size: large;
-    margin-bottom: 20px;
-    color: rgb(0, 163, 109);
+.price {
+  width: 30%;
+  position: relative;
+  float: right;
+  font-size: large;
+  margin-bottom: 20px;
+  color: rgb(0, 163, 109);
 }
-small{
-    font-size: x-small;
+small {
+  font-size: x-small;
 }

@@ -44,10 +44,20 @@
     </mat-card-content>
     <mat-card-content> R{{ product.price }} </mat-card-content>
     <mat-card-actions>
-      <button (click)="onButtonClick($event,'cart',product)" mat-button type="button" class="add-cart">
+      <button
+        (click)="onButtonClick($event, 'cart', product)"
+        mat-button
+        type="button"
+        class="add-cart"
+      >
         Add to cart {{ " " }} <mat-icon>add_shopping_cart</mat-icon>
       </button>
-      <button (click)="onButtonClick($event,'wishlist',product)" mat-button type="button" class="add-wishlist">
+      <button
+        (click)="onButtonClick($event, 'wishlist', product)"
+        mat-button
+        type="button"
+        class="add-wishlist"
+      >
         <mat-icon>favorite</mat-icon>
       </button>
     </mat-card-actions>

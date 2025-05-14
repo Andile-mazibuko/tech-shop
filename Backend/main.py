@@ -1,7 +1,7 @@
 from typing import List
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Path
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import LogInSchema, ProductSchema, UserSchema, WishlistSchema,OrderSchema
+from schemas import LogInSchema, ProductSchema, UpdateOrderStatusSchema, UserSchema, WishlistSchema,OrderSchema
 from database import Base,SessionLocal,engine
 from models import User,Product,Order,OrderProduct,WishList,Cart,CartProduct
 
@@ -28,6 +28,8 @@ def create_user(user: UserSchema):
     try:
         db_session.add(new_user)
         db_session.commit()
+        db_session.refresh(new_user)
+        return new_user
     except Exception as e:
          raise HTTPException(status_code=500,detail="Internal server Exception")
 
@@ -43,6 +45,7 @@ def get_user(user_credentials: LogInSchema) :
     try:
         user:User = db_session.query(User).filter(User.email == user_credentials.email).first()
         if user.password == user_credentials.password:
+            print("SUCCESS")
             return user
         else:
             raise HTTPException(404)
@@ -156,16 +159,24 @@ def delete_from_cart(user_id:int,prod_id:int):
 
 @app.post("/create_order")
 def create_order(order:OrderSchema):
+    print('FUNCTION START ')
     #create order first
-    user_order = Order(user_id=order.user_id,total=order.total)
-    db_session.add(user_order)
-    db_session.flush()
-    
-    #Add products
-    for product in order.products:
-        order_product = OrderProduct(prod_id = product.prod_id,order_id = user_order.order_id)
-        db_session.add(order_product)
-    db_session.commit()
+    try:
+        user_order = Order(user_id=order.user_id,total=order.total)
+        db_session.add(user_order)
+        print('ABOUT TO CREATE AN ID')
+        db_session.commit()
+        print("ORDER CREATED")
+        #Add products
+        for product in order.products:
+            #user_order_id = db_session.query(Order) 
+            order_product = OrderProduct(prod_id = product.prod_id,order_id = user_order.order_id)
+            db_session.add(order_product)
+        db_session.commit()
+
+    except Exception as e:
+        db_session.rollback()
+        raise HTTPException(500)
 
 @app.get("/orders")
 def get_orders():
@@ -196,3 +207,17 @@ def get_orders():
             ))
         
     return order_products
+
+@app.put('/update_order/status/{order_id}')
+def update_order_status(order_id:int,order_status:UpdateOrderStatusSchema) -> None:
+    try:
+        order = db_session.query(Order).filter(Order.order_id == order_id).first()
+        
+        if not order:
+            raise HTTPException(404)
+        
+        order.status = order_status.new_status
+        db_session.commit()
+        
+    except Exception:
+        raise HTTPException(500)

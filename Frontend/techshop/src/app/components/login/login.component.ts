@@ -68,7 +68,7 @@ export class LoginComponent {
             //Display error on the snack bar
             this.snackBar.openSnackBar('Incorrect Log in credentials');
           } else if (err.status == 404) {
-            this.snackBar.openSnackBar("Account not Found")
+            this.snackBar.openSnackBar('Account not Found');
           }
           return EMPTY;
         })
@@ -81,12 +81,13 @@ export class LoginComponent {
 
     globalVars.customerAccess = true;
   }
+
   signUp() {
     this.close();
     this.dialog.open(SignupComponent, { width: '600px' });
   }
+
   close() {
     this.dialogRef.close();
   }
-
 }

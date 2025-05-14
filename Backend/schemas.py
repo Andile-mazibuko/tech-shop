@@ -33,3 +33,7 @@ class OrderSchema(BaseModel):
     date: Optional[str] = None
     total: float
     products: List[ProductSchema]
+
+class UpdateOrderStatusSchema(BaseModel):
+    order_id: int
+    new_status: str
